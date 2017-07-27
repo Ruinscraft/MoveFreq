@@ -22,8 +22,8 @@ public class PositionLookHook {
     private final MoveFreqPlugin plugin;
     private Map<UUID, PositionLookPacket> cache = new ConcurrentHashMap<>();
 
-    long suppressed = 0;
-    long total = 0;
+    // long suppressed = 0;
+    // long total = 0;
 
     public void hook() {
         PacketAdapter.AdapterParameteters params = new PacketAdapter.AdapterParameteters().clientSide()
@@ -40,10 +40,10 @@ public class PositionLookHook {
                 if (last == null || last.isExpired()) {
                     cache.put(uuid, new PositionLookPacket(wrapper));
                 } else if (p.getVelocity().length() < 0.0785) {
-                    suppressed++;
+                    // suppressed++;
                     last.apply(wrapper);
                 }
-                total++;
+                // total++;
             }
         };
         plugin.getProtocolManager().addPacketListener(adapter);
@@ -53,8 +53,8 @@ public class PositionLookHook {
                 cache.remove(e.getPlayer().getUniqueId());
             }
         }, plugin);
-        plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> {
+        /* plugin.getServer().getScheduler().runTaskTimerAsynchronously(plugin, () -> {
             plugin.getLogger().info("Suppressed " + (suppressed * 100) / total + "% of " + total);
-        }, 100, 100);
+        }, 100, 100); */
     }
 }
