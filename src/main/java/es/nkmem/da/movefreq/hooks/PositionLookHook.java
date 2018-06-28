@@ -40,7 +40,8 @@ public class PositionLookHook {
 				PositionLookPacket last = cache.get(uuid);
 				if (last == null || last.isExpired()) {
 					cache.put(uuid, new PositionLookPacket(wrapper));
-				} else if (p.getVelocity().length() < 0.0785) {
+				} else if (p.getVelocity().length() 
+						< MoveFreqPlugin.getInstance().getVelocityThreshold()) {
 					suppressed++;
 					last.apply(wrapper);
 				}

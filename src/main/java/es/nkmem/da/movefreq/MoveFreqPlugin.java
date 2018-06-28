@@ -14,14 +14,16 @@ public class MoveFreqPlugin extends JavaPlugin {
 
 	private boolean messages;
 	private int afkThreshold;
+	private double velocityThreshold;
 
 	@Override
 	public void onEnable() {
 		instance = this;
 
 		saveDefaultConfig();
-		messages = getConfig().getBoolean("messages", false);
-		afkThreshold = getConfig().getInt("afk-threshold", 120);
+		messages = getConfig().getBoolean("messages");
+		afkThreshold = getConfig().getInt("afk-threshold");
+		velocityThreshold = getConfig().getDouble("velocity-threshold");
 
 		protocolManager = ProtocolLibrary.getProtocolManager();
 		new PositionLookHook().hook();
@@ -34,7 +36,8 @@ public class MoveFreqPlugin extends JavaPlugin {
 			}
 			if (args[0].equals("reload")) {
 				reload();
-				sender.sendMessage("MoveFreq reloaded");
+				getLogger().info("Configuration reloaded by " + sender.getName());
+				sender.sendMessage("MoveFreq configuration reloaded");
 				return true;
 			}
 			sender.sendMessage("/movefreq reload");
@@ -49,8 +52,9 @@ public class MoveFreqPlugin extends JavaPlugin {
 
 	public void reload() {
 		reloadConfig();
-		messages = getConfig().getBoolean("messages", false);
-		afkThreshold = getConfig().getInt("seconds-afk", 120);
+		messages = getConfig().getBoolean("messages");
+		afkThreshold = getConfig().getInt("seconds-afk");
+		velocityThreshold = getConfig().getDouble("velocity-threshold");
 	}
 
 	public static MoveFreqPlugin getInstance() {
@@ -67,6 +71,10 @@ public class MoveFreqPlugin extends JavaPlugin {
 
 	public int getAFKThreshold() {
 		return afkThreshold;
+	}
+
+	public double getVelocityThreshold() {
+		return velocityThreshold;
 	}
 
 }

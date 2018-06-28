@@ -1,2 +1,4 @@
 messages: true
 seconds-afk: 120
+## Increasing this may have adverse effects with other plugins
+velocity-threshold: .0785
