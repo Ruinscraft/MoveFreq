@@ -22,5 +22,17 @@ public class PositionPacket {
 		wrapper.setZ(z);
 		wrapper.setOnGround(onGround);
 	}
+
+	public boolean equals(Object object) {
+		if (!(object instanceof PositionPacket)) {
+			return false;
+		}
+		PositionPacket packet = (PositionPacket) object;
+		if (packet.x == this.x && packet.y == this.y 
+				&& packet.z == this.z && packet.onGround == this.onGround) {
+			return true;
+		}
+		return false;
+	}
 }
 

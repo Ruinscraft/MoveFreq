@@ -55,9 +55,9 @@ public class PositionLookHook {
 			}
 		}, MoveFreqPlugin.getInstance());
 
-		if (MoveFreqPlugin.getInstance().hasMessages()) {
-			MoveFreqPlugin.getInstance().getServer().getScheduler()
-			.runTaskTimerAsynchronously(MoveFreqPlugin.getInstance(), () -> {
+		MoveFreqPlugin.getInstance().getServer().getScheduler()
+		.runTaskTimerAsynchronously(MoveFreqPlugin.getInstance(), () -> {
+			if (MoveFreqPlugin.getInstance().hasMessages()) {
 				if (total == 0) {
 					return;
 				}
@@ -65,8 +65,8 @@ public class PositionLookHook {
 				.getLogger().info("Suppressed " + (suppressed * 100) / total + "% of " + total);
 				suppressed = 0;
 				total = 0;
-	        }, 600, 600);
-		}
+			}
+		}, 600, 600);
 	}
 
 }

@@ -21,7 +21,7 @@ public class MoveFreqPlugin extends JavaPlugin {
 
 		saveDefaultConfig();
 		messages = getConfig().getBoolean("messages", false);
-		afkThreshold = getConfig().getInt("seconds-afk", 120);
+		afkThreshold = getConfig().getInt("afk-threshold", 120);
 
 		protocolManager = ProtocolLibrary.getProtocolManager();
 		new PositionLookHook().hook();
@@ -34,6 +34,7 @@ public class MoveFreqPlugin extends JavaPlugin {
 			}
 			if (args[0].equals("reload")) {
 				reload();
+				sender.sendMessage("MoveFreq reloaded");
 				return true;
 			}
 			sender.sendMessage("/movefreq reload");

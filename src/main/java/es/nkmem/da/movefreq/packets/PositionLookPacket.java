@@ -1,12 +1,9 @@
 package es.nkmem.da.movefreq.packets;
 
 import es.nkmem.da.movefreq.wrappers.WrapperPlayClientPositionLook;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 
-@EqualsAndHashCode(exclude={"initTime"})
-@ToString
 public class PositionLookPacket {
+
 	private long initTime;
 
 	private double x;
@@ -42,4 +39,18 @@ public class PositionLookPacket {
 		wrapper.setPitch(pitch);
 		wrapper.setOnGround(onGround);
 	}
+
+	public boolean equals(Object object) {
+		if (!(object instanceof PositionPacket)) {
+			return false;
+		}
+		PositionLookPacket packet = (PositionLookPacket) object;
+		if (packet.x == this.x && packet.y == this.y 
+				&& packet.z == this.z && packet.onGround == this.onGround
+				&& packet.yaw == this.yaw && packet.pitch == this.pitch) {
+			return true;
+		}
+		return false;
+	}
+
 }

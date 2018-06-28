@@ -24,12 +24,6 @@
 			<version>4.4.0-20180612.184808-21</version>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<version>1.18.0</version>
-			<scope>provided</scope>
-		</dependency>
 	</dependencies>
 	<repositories>
 		<repository>

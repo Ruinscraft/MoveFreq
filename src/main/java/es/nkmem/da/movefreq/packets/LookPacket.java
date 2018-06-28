@@ -19,4 +19,17 @@ public class LookPacket {
 		wrapper.setPitch(pitch);
 		wrapper.setOnGround(onGround);
 	}
+
+	public boolean equals(Object object) {
+		if (!(object instanceof PositionPacket)) {
+			return false;
+		}
+		LookPacket packet = (LookPacket) object;
+		if (packet.yaw == this.yaw && packet.pitch == this.pitch 
+				&& packet.onGround == this.onGround) {
+			return true;
+		}
+		return false;
+	}
+
 }

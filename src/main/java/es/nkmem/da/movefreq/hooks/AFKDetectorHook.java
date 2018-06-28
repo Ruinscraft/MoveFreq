@@ -44,8 +44,8 @@ public class AFKDetectorHook {
 	}
 
 	private boolean isAFK(Player p) {
-		return (System.currentTimeMillis() - lastUpdate.get(p.getUniqueId())) 
-				> (MoveFreqPlugin.getInstance().getAFKThreshold() * 1000);
+		return System.currentTimeMillis() - lastUpdate.get(p.getUniqueId()) 
+				> MoveFreqPlugin.getInstance().getAFKThreshold() * 1000;
 	}
 
 	public void hook() {
@@ -153,16 +153,19 @@ public class AFKDetectorHook {
 			}
 		});
 
-		if (MoveFreqPlugin.getInstance().hasMessages()) {
-			MoveFreqPlugin.getInstance().getServer().getScheduler()
-			.runTaskTimerAsynchronously(MoveFreqPlugin.getInstance(), () -> {
+		MoveFreqPlugin.getInstance().getServer().getScheduler()
+		.runTaskTimerAsynchronously(MoveFreqPlugin.getInstance(), () -> {
+			if (MoveFreqPlugin.getInstance().hasMessages()) {
 				int afk = 0;
 				for (Player p : Bukkit.getOnlinePlayers()) {
 					if (isAFK(p)) afk++;
 				}
+				if (afk == 0) {
+					return;
+				}
 				MoveFreqPlugin.getInstance().getLogger().info("Number of AFK players: " + afk);
-			}, 600, 600);
-		}
+			}
+		}, 600, 600);
 	}
 
 	public class MovementData {
