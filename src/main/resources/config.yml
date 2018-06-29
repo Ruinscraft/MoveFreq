@@ -1,4 +1,6 @@
+## Enable messages which notify how many packets are being suppressed
 messages: true
-seconds-afk: 120
+## Seconds before a user is defined as being AFK
+afk-threshold: 120
 ## Increasing this may have adverse effects with other plugins
 velocity-threshold: .0785
